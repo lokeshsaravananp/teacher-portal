@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal</title>
+    <link rel="stylesheet" href="nano styles.css"> <!-- Ensure the correct path -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+<div class="border-container"> <!-- Added border-container -->
+    <h2 id="login-title">tailwebs.</h2>
+    <div id="login-container" class="container">
+        <label for="username">Username</label>
+        <div class="input-container">
+            <div class="icon-container">
+                <i class="fas fa-user"></i>
+            </div>
+            <input type="text" id="username" placeholder="Enter your username">
+        </div>
+
+        <label for="password">Password</label>
+        <div class="input-container">
+            <div class="icon-container">
+                <i class="fas fa-lock"></i>
+            </div>
+            <input type="password" id="password" placeholder="Enter your password">
+            <div class="eye-icon-container">
+                <i class="fas fa-eye" id="toggle-password" onclick="togglePassword()"></i> 
+            </div>
+        </div>
+
+        <div id="forgot-password">Forgot Password?</div>
+        <button onclick="login()">Login</button>
+        <div id="login-message"></div>
+    </div>
+    <div id="student-list" style="display:none;">
+        <div id="student-h2">
+        <h2>tailwebs</h2>
+        </div>
+        <!-- New div for positioning Home and Logout links -->
+        <div id="action-links">
+            <a href="#" id="homeBtn" onclick="showHome()" class="clickable-text">Home</a> |
+            <a href="#" id="logoutBtn" onclick="logout()" class="clickable-text">Logout</a>
+        </div>
+        <!-- Table structure for students -->
+        <div class="table-container">
+            <table id="students-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Subject</th>
+                        <th>Mark</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="student-info">
+                                <div class="profile-circle">S</div>
+                                <span>Sean Abot</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <div class="dropdown-toggle">⋮</div>
+                                <div class="dropdown-content">
+                                    <span onclick="editStudent(1)">Edit</span>
+                                    <span onclick="deleteStudent(1)">Delete</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Repeat for more students -->
+                </tbody>
+            </table>
+            <button class="add-button" onclick="showAddStudentModal()">Add Student</button>
+        </div>
+
+        <div id="add-student-modal">
+            <div class="modal-content">
+                <h2>Add Student</h2>
+                <div class="input-container">
+                    <div class="icon-container">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <input type="text" id="student-name" placeholder="Name" required>
+                </div>
+                <div class="input-container">
+                    <div class="icon-container">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <input type="text" id="student-subject" placeholder="Subject" required>
+                </div>
+                <div class="input-container">
+                    <div class="icon-container">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <input type="number" id="student-marks" placeholder="Marks" required>
+                </div>
+                <button class="submit-btn" onclick="addStudent()">ADD</button>
+                <button class="cancel-btn" onclick="closeAddStudentModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggle-password');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    }
+</script>
+</body>
+</html>
